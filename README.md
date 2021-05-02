@@ -1,4 +1,5 @@
 # React TypeScript
+Simple ReactJS project using redux-thunk
 
 ## Initial setup
 Install **json-server** using the command below:
@@ -20,5 +21,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ### Todo:
 - [x] Redux-thunk
-- [ ] Material UI
+- [x] Material UI
 - [ ] Multi-language using react-i18next

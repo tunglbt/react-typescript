@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Link, Route, Switch} from 'react-router-dom';
-import UserContainer from './features/containers/UserContainer';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
+import UserContainer from './features/screens/UserScreen';
+import {Button} from '@material-ui/core';
 
 function App() {
   return (
@@ -9,7 +10,9 @@ function App() {
       <BrowserRouter>
         <div>
           <div>
-            <Link to='/user'>User</Link>
+            <Button variant="contained" color="primary" href='/user'>
+              Users
+            </Button>
           </div>
           <Switch>
             <Route path="/user" component={UserContainer}/>
