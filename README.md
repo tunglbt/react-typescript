@@ -1,6 +1,8 @@
 # React TypeScript
 Simple ReactJS project using redux-thunk
 
+![image](https://github.com/tunglbt/react-typescript/blob/main/project-images/dashboard.png?raw=true)
+
 ## Initial setup
 Install **json-server** using the command below:
 
