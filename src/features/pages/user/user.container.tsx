@@ -1,11 +1,10 @@
 import * as React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import userActions from 'src/core/reduxs/User/userActions';
 import User from 'src/core/models/User.model';
-import 'src/features/screens/UserScreen.style.scss';
+import 'src/features/pages/user/user.style.scss';
 import {
     Checkbox,
-    Paper,
     Table,
     TableBody,
     TableCell,
@@ -13,7 +12,7 @@ import {
     TableHead,
     TablePagination,
     TableRow,
-} from '@material-ui/core';
+} from '@mui/material';
 
 interface Column {
     id: 'id' | 'firstName' | 'lastName' | 'active' | 'posts' | 'messages';
@@ -24,12 +23,12 @@ interface Column {
 }
 
 const columns: Column[] = [
-    { id: 'id', label: 'ID', minWidth: 50 },
-    { id: 'firstName', label: 'First Name', minWidth: 200 },
-    { id: 'lastName', label: 'Last Name', minWidth: 200 },
-    { id: 'active', label: 'Active', minWidth: 100 },
-    { id: 'posts', label: 'Posts', minWidth: 100 },
-    { id: 'messages', label: 'Messages', minWidth: 100 },
+    {id: 'id', label: 'ID', minWidth: 50},
+    {id: 'firstName', label: 'First Name', minWidth: 200},
+    {id: 'lastName', label: 'Last Name', minWidth: 200},
+    {id: 'active', label: 'Active', minWidth: 100},
+    {id: 'posts', label: 'Posts', minWidth: 100},
+    {id: 'messages', label: 'Messages', minWidth: 100},
 ];
 
 type Props = {
@@ -39,7 +38,7 @@ type Props = {
     error: any;
 }
 
-class UserScreen extends React.Component<Props, any> {
+class UserContainer extends React.Component<Props, any> {
     state = {
         page: 0,
         rowsPerPage: 5
@@ -50,7 +49,7 @@ class UserScreen extends React.Component<Props, any> {
     };
 
     handleChangePage = (event: unknown, newPage: number) => {
-        this.setState({ page: newPage});
+        this.setState({page: newPage});
     }
 
     handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,8 +71,8 @@ class UserScreen extends React.Component<Props, any> {
         const {page, rowsPerPage} = this.state;
 
         return (
-            <Paper className='root'>
-                <TableContainer className='container'>
+            <div>
+                <TableContainer>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
                             <TableRow>
@@ -81,7 +80,7 @@ class UserScreen extends React.Component<Props, any> {
                                     <TableCell
                                         key={column.id}
                                         align={'center'}
-                                        style={{ minWidth: column.minWidth }}
+                                        style={{minWidth: column.minWidth}}
                                     >
                                         {column.label}
                                     </TableCell>
@@ -105,7 +104,7 @@ class UserScreen extends React.Component<Props, any> {
                                             <Checkbox
                                                 checked={row.active}
                                                 color="primary"
-                                                inputProps={{ 'aria-label': 'primary checkbox' }}
+                                                inputProps={{'aria-label': 'primary checkbox'}}
                                             />
                                         </TableCell>
                                         <TableCell align={'center'}>
@@ -126,10 +125,10 @@ class UserScreen extends React.Component<Props, any> {
                     count={rows.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
-                    onChangePage={this.handleChangePage}
-                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    onRowsPerPageChange={this.handleChangeRowsPerPage}
+                    onPageChange={this.handleChangePage}
                 />
-            </Paper>
+            </div>
         );
     }
 }
@@ -147,4 +146,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(UserScreen);
+)(UserContainer);

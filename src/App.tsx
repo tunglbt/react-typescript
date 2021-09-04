@@ -1,26 +1,24 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Switch} from 'react-router-dom';
-import UserContainer from './features/screens/UserScreen';
-import {Button} from '@material-ui/core';
+import 'fontsource-roboto';
+import Router from 'src/core/utils/routes';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { green } from '@mui/material/colors';
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: green[600]
+        }
+    }
+});
 
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <div>
-          <div>
-            <Button variant="contained" color="primary" href='/user'>
-              Users
-            </Button>
-          </div>
-          <Switch>
-            <Route path="/user" component={UserContainer}/>
-          </Switch>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Router/>
+        </ThemeProvider>
+    );
 }
 
 export default App;
