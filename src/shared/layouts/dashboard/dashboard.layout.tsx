@@ -17,7 +17,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Badge from '@mui/material/Badge';
@@ -26,6 +26,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import InputBase from '@mui/material/InputBase';
+import LoginIcon from '@mui/icons-material/Login';
 
 const drawerWidth = 240;
 
@@ -120,6 +121,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function DashboardLayout() {
     const theme = useTheme();
+    const navigate = useNavigate();
     const [open, setOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -127,10 +129,6 @@ export default function DashboardLayout() {
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
 
     const handleDrawerClose = () => {
         setOpen(false);
@@ -233,7 +231,7 @@ export default function DashboardLayout() {
             <AppBar position="fixed" open={open}>
                 <Toolbar>
                     <IconButton
-                        onClick={handleDrawerOpen}
+                        onClick={() => setOpen(!open)}
                         size="large"
                         edge="start"
                         color="inherit"
@@ -334,14 +332,12 @@ export default function DashboardLayout() {
                 </List>
                 <Divider/>
                 <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
-                            </ListItemIcon>
-                            <ListItemText primary={text}/>
-                        </ListItem>
-                    ))}
+                    <ListItem button onClick={() => navigate('/login')}>
+                        <ListItemIcon>
+                            <LoginIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary='Login'/>
+                    </ListItem>
                 </List>
             </Drawer>
             <Main open={open}>
